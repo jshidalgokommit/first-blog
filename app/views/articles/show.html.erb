@@ -1,5 +1,9 @@
 <%= render 'layouts/breadcrumb', data: { :current => 'Article', :breadcrumb => [{ :name => 'Home', :url => root_path }] } %>
 
+<% content_for :js do %>
+  <%= javascript_include_tag "articles/show" %>
+<% end %>
+
 <div class="card ">
   <div class="card-body">
     <h5 class="card-title"><%= @article.title %></h5>
@@ -9,10 +13,10 @@
 
     <div class="d-flex justify-content-end mt-2 gap-3">
       <%= link_to "Edit", edit_article_path(@article) %>
-      <%= link_to "Destroy", @article, data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      } %>
+      <%= form_with url: @article, method: :delete, id: 'delete_article_form' do |form| %>
+        <a onclick="delete_article()" href="#">Delete</a>
+      <% end %>
+
     </div>
 
   </div>

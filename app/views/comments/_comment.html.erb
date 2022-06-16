@@ -1,3 +1,7 @@
+<% content_for :js do %>
+  <%= javascript_include_tag "comments/comment" %>
+<% end %>
+
 <% unless comment.archived? %>
   <div class="card border-success mb-3" style="border-width: 0 0 0 3px">
     <div class="card-body">
@@ -6,11 +10,10 @@
 
       <div class="d-flex justify-content-between mt-2 gap-3">
         <small>Published on: <%= comment.created_at %></small>
-
-        <%= link_to "Destroy Comment", [comment.article, comment], data: {
-          turbo_method: :delete,
-          turbo_confirm: "Are you sure?"
-        } %>
+        
+        <%= form_with url: [comment.article, comment], method: :delete, id: 'delete_comment_form' do |form| %>
+          <a onclick="delete_comment()" href="#">Delete</a>
+        <% end %>
       </div>
 
     </div>
