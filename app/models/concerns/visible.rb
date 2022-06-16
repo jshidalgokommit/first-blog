@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# this module allows to determine the visibility of an article or comment.
 module Visible
   extend ActiveSupport::Concern
 
-  VALID_STATUSES = %w[public private archived]
+  VALID_STATUSES = %w[public private archived].freeze
 
   included do
     validates :status, inclusion: { in: VALID_STATUSES }
