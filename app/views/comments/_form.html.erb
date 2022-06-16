@@ -1,19 +1,24 @@
-<%= form_with model: [ @article, @article.comments.build ] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
+<%= form_with model: [@article, @article.comments.build] do |form| %>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <%= form.label :commenter, class: 'form-label' %>
+        <%= form.text_field :commenter, class: 'form-control', placeholder: 'Commenter', required: 'require' %>
+      </div>
 
-  <p>
-    <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
-  </p>
+      <div class="mb-3">
+        <%= form.label :body, class: 'form-label' %>
+        <%= form.text_area :body, class: 'form-control', rows: 3, required: 'require' %>
+      </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
+      <div class="mb-3">
+        <%= form.label :status, class: 'form-label' %>
+        <%= form.select :status, [['Public', 'public'], ['Privte', 'private'], ['Archived', 'prchived']], {}, { class: 'form-control' } %>
+      </div>
+
+      <div>
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
 <% end %>
