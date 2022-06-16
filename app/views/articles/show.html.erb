@@ -1,3 +1,5 @@
+<%= render 'layouts/breadcrumb', data: {:current => 'Article', :breadcrumb => [{:name => 'Home', :url => root_path}]} %>
+
 <h1><%= @article.title %> - <%= @article.status %></h1>
 
 <p><%= @article.body %></p>
@@ -11,7 +13,9 @@
 </ul>
 
 <h2>Comments</h2>
+
 <%= render @article.comments %>
 
 <h2>Add a comment:</h2>
+
 <%= render 'comments/form' %>
