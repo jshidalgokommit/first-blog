@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
+# Article controller
 class ArticlesController < ApplicationController
-  # http_basic_authenticate_with name: "admin", password: "admin", except: [:index, :show]
+  #http_basic_authenticate_with name: 'admin', password: 'admin', except: %i[index show]
+
 
   def index
-    #list of articles
+    # list of articles
     @articles = Article.all
   end
 
@@ -43,7 +47,7 @@ class ArticlesController < ApplicationController
 
     redirect_to root_path, status: :see_other
   end
- #private methods
+
   private
 
   def article_params
