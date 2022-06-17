@@ -13,11 +13,11 @@
         <% if user_signed_in? %>
           <a type="button" class="btn btn-success" href="<%= new_article_path %>">New post</a>
         <% end %>
-        <div class="dropdown">
+        <div class="btn-group">
           <button class="btn btn-transparent rounded-circle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i data-feather="<%= user_signed_in? ? 'user-check' : 'user' %>"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+          <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
             <li><h6 class="dropdown-header"><%= user_signed_in? ? 'Logged user' : 'Guest user' %></h6>
               <% if user_signed_in? %>
                 <small class="mx-3"><%= current_user.email %></small>
