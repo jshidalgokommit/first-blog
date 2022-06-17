@@ -24,8 +24,9 @@
                 <hr class="dropdown-divider">
               <% end %>
             </li>
-            <li><a class="dropdown-item">asdsds</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <% if user_signed_in? %>
+              <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Profile</a></li>
+            <% end %>
             <li>
               <hr class="dropdown-divider">
             </li>
