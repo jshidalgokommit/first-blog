@@ -10,6 +10,8 @@
   <%= yield :css %>
 
   <%= javascript_include_tag :application, integrity: true %>
+  <!--  feather icons cdn-->
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
   <%= yield :js %>
 </head>
 
@@ -28,6 +30,10 @@
   <p class="alert"><%= alert %></p>
 <% end %>
 
+<script>
+    // use feather icons
+    feather.replace()
+</script>
 
 </body>
 </html>
