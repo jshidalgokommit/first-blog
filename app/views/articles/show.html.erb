@@ -1,38 +1,40 @@
-<%= render 'layouts/breadcrumb', data: { :current => 'Article', :breadcrumb => [{ :name => 'Home', :url => root_path }] } %>
-
 <% content_for :js do %>
   <%= javascript_include_tag "articles/show" %>
 <% end %>
 
-<div class="card ">
-  <div class="card-body">
-    <h5 class="card-title"><%= @article.title %></h5>
-    <h6 class="card-subtitle mb-2 text-muted">Jon Doe</h6>
-    <p class="card-text"><%= @article.body %></p>
-    <small>Published on: <%= @article.created_at %></small>
+<% content_for :blog_body do %>
+  <%= render 'layouts/blog/breadcrumb', data: { :current => 'Article', :breadcrumb => [{ :name => 'Home', :url => root_path }] } %>
 
-    <div class="d-flex justify-content-end mt-2 gap-3">
-      <%= link_to "Edit", edit_article_path(@article) %>
-      <%= form_with url: @article, method: :delete, id: 'delete_article_form' do |form| %>
-        <a onclick="delete_article()" href="#">Delete</a>
-      <% end %>
+  <div class="card ">
+    <div class="card-body">
+      <h5 class="card-title"><%= @article.title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Jon Doe</h6>
+      <p class="card-text"><%= @article.body %></p>
+      <small>Published on: <%= @article.created_at %></small>
+
+      <div class="d-flex justify-content-end mt-2 gap-3">
+        <%= link_to "Edit", edit_article_path(@article) %>
+        <%= form_with url: @article, method: :delete, id: 'delete_article_form' do |form| %>
+          <a onclick="delete_article()" href="#">Delete</a>
+        <% end %>
+
+      </div>
 
     </div>
+  </div>
+
+  <div class="m-2 p-2">
+    <h5>Comments</h5>
+
+    <% if !@article.comments.empty? %>
+      <%= render @article.comments %>
+    <% else %>
+      <small>No comments ...</small>
+    <% end %>
 
   </div>
-</div>
 
-<div class="m-2 p-2">
-  <h5>Comments</h5>
+  <h4>Add a comment:</h4>
 
-  <% if !@article.comments.empty? %>
-    <%= render @article.comments %>
-  <% else %>
-    <small>No comments ...</small>
-  <% end %>
-
-</div>
-
-<h4>Add a comment:</h4>
-
-<%= render 'comments/form' %>
+  <%= render 'comments/form' %>
+<% end %>
