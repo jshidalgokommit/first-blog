@@ -1,18 +1,18 @@
-<%= render 'layouts/breadcrumb', data: {:current => 'Home', :breadcrumb => []} %>
+<%= render 'layouts/breadcrumb', data: { :current => 'Home', :breadcrumb => [] } %>
 
 <h1 align="center">Articles</h1>
 
 <div class="list-group">
   <% @articles.each do |article| %>
     <% unless article.archived? %>
-      <a href="<%= article_path article %>" class="list-group-item list-group-item-action" aria-current="true">
+      <%= link_to article, class: 'list-group-item list-group-item-action' do %>
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1"><%= article.title %></h5>
           <small><%= time_ago_in_words(article.created_at) %></small>
         </div>
         <p class="mb-1 text-truncate"><%= article.body %></p>
         <small><%= article.comments.size %> comments</small>
-      </a>
+      <% end %>
     <% end %>
   <% end %>
 </div>

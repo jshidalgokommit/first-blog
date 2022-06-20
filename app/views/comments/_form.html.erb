@@ -13,7 +13,7 @@
 
       <div class="mb-3">
         <%= form.label :status, class: 'form-label' %>
-        <%= form.select :status, [['Public', 'public'], ['Privte', 'private'], ['Archived', 'prchived']], {}, { class: 'form-control' } %>
+        <%= form.select :status, valid_statuses, {}, { class: 'form-control' } %>
       </div>
 
       <div>
