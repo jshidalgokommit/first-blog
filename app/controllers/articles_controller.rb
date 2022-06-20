@@ -2,7 +2,6 @@
 
 # Article controller
 class ArticlesController < ApplicationController
-  #http_basic_authenticate_with name: 'admin', password: 'admin'
   before_action :authenticate_user!, except: %i[index show]
 
   def index
@@ -29,6 +28,13 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    if user_signed_in? && @article.blogger_id == current_user.blogger.id
+      @article
+    else
+      redirect_to action: 'index'
+    end
+  rescue StandardError
+    redirect_to action: 'index'
   end
 
   def update
@@ -43,14 +49,19 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    @article.destroy
-
-    redirect_to root_path, status: :see_other
+    if user_signed_in? && @article.blogger_id == current_user.blogger.id
+      @article.destroy
+      redirect_to root_path, status: :see_other
+    else
+      redirect_to action: 'index'
+    end
+  rescue StandardError
+    redirect_to action: 'index'
   end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :status)
+    params.require(:article).permit(:title, :body, :status, :blogger_id)
   end
 end

@@ -8,16 +8,17 @@
   <div class="card ">
     <div class="card-body">
       <h5 class="card-title"><%= @article.title %></h5>
-      <h6 class="card-subtitle mb-2 text-muted">Jon Doe</h6>
+      <h6 class="card-subtitle mb-2 text-muted"><%= @article.blogger.full_name %></h6>
       <p class="card-text"><%= @article.body %></p>
       <small>Published on: <%= @article.created_at %></small>
 
       <div class="d-flex justify-content-end mt-2 gap-3">
-        <%= link_to "Edit", edit_article_path(@article) %>
-        <%= form_with url: @article, method: :delete, id: 'delete_article_form' do |form| %>
-          <a onclick="delete_article()" href="#">Delete</a>
+        <% if user_signed_in? && @article.blogger_id == current_user.blogger.id%>
+          <%= link_to "Edit", edit_article_path(@article) %>
+          <%= form_with url: @article, method: :delete, id: 'delete_article_form' do |form| %>
+            <a onclick="delete_article()" href="#">Delete</a>
+          <% end %>
         <% end %>
-
       </div>
 
     </div>
@@ -35,6 +36,9 @@
   </div>
 
   <h4>Add a comment:</h4>
-
-  <%= render 'comments/form' %>
+  <% if user_signed_in? %>
+    <%= render 'comments/form' %>
+  <% else  %>
+    <span><a href="<%= new_user_session_path %>">Login</a> for comment</span>
+  <% end %>
 <% end %>
