@@ -1,8 +1,9 @@
 <% content_for :blog_body do %>
-  <%= render 'layouts/blog/breadcrumb', data: {:current => 'New article', :breadcrumb => [{:name => 'Home', :url => root_path}]} %>
+  <%= render 'layouts/blog/breadcrumb', data: { :current => 'New article', :breadcrumb => [{ :name => 'Home', :url => root_path }] } %>
 
   <h1 align="center">New Article</h1>
 
   <%= render "form", article: @article %>
 
 <% end %>
+

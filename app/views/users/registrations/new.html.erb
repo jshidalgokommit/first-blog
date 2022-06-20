@@ -1,6 +1,8 @@
 <div class="card w-75 mt-4 m-auto">
   <div class="card-header d-flex justify-content-center align-items-center">
-    <a href="<%= user_session_path %>"><i data-feather="arrow-left-circle"></i></a>
+    <%= link_to user_session_path do %>
+      <i data-feather="arrow-left-circle"></i>
+    <% end %>
     <h4 class="flex-grow-1" align="center">Sign up</h4>
   </div>
   <div class="card-body">

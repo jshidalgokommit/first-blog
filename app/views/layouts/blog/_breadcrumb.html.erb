@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb justify-content-end">
     <% data[:breadcrumb].each do |item| %>
-      <li class="breadcrumb-item"><a href="<%= item[:url] %>"><%= item[:name] %></a></li>
+      <li class="breadcrumb-item"><%= link_to item[:name], item[:url] %></li>
     <% end %>
     <li class="breadcrumb-item active" aria-current="page"><%= data[:current] %></li>
   </ol>
