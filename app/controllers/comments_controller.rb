@@ -13,13 +13,17 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    @comment.destroy
-    redirect_to article_path(@article), status: 303
+    if user_signed_in? && @comment.blogger_id == current_user.blogger.id
+      @comment.destroy
+      redirect_to article_path(@article), status: 303
+    else
+      redirect_to article_path(@article), status: :unauthorized
+    end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:commenter, :body, :status)
+    params.require(:comment).permit(:commenter, :body, :status, :blogger_id)
   end
 end

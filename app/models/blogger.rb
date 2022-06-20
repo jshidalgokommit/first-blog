@@ -5,6 +5,7 @@ class Blogger < ApplicationRecord
 
   belongs_to :user
   has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # blogger full name
   def full_name
