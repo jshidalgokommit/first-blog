@@ -1,10 +1,10 @@
 <%= form_with model: [@article, @article.comments.build] do |form| %>
   <div class="card">
     <div class="card-body">
-      <%= form.hidden_field :blogger_id, value: current_user.blogger.id %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
       <div class="mb-3">
         <%= form.label :commenter, class: 'form-label' %>
-        <%= form.text_field :commenter, class: 'form-control', placeholder: 'Commenter', required: 'require', readonly: 'readonly', value: current_user.blogger.full_name %>
+        <%= form.text_field :commenter, class: 'form-control', placeholder: 'Commenter', required: 'require', readonly: 'readonly', value: current_user.full_name %>
       </div>
       <div class="mb-3">
         <%= form.label :body, class: 'form-label' %>

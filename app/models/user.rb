@@ -6,5 +6,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :blogger, dependent: :destroy
+  has_one :article, dependent: :destroy
+  has_one :comment, dependent: :destroy
+
+  validates :name, presence: true
+
+  # get user full name
+  def full_name
+    "#{name} #{last_name}"
+  end
 end
