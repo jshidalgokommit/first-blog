@@ -1,7 +1,7 @@
 <%= form_with model: article do |form| %>
   <div class="card">
     <div class="card-body">
-      <%= form.hidden_field :blogger_id, value: current_user.blogger.id %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
       <div class="mb-3">
         <%= form.label :title, class: 'form-label' %>
         <%= form.text_field :title, class: 'form-control', placeholder: 'Article title', required: 'require' %>

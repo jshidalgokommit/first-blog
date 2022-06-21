@@ -3,6 +3,7 @@
 # Article controller
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+  before_action :verify_owner, only: %i[edit destroy]
 
   def index
     # list of articles
@@ -27,14 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
-    if user_signed_in? && @article.blogger_id == current_user.blogger.id
-      @article
-    else
-      redirect_to action: 'index'
-    end
-  rescue StandardError
-    redirect_to action: 'index'
+    @article
   end
 
   def update
@@ -48,20 +42,21 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    if user_signed_in? && @article.blogger_id == current_user.blogger.id
-      @article.destroy
-      redirect_to root_path, status: :see_other
-    else
-      redirect_to action: 'index'
-    end
-  rescue StandardError
-    redirect_to action: 'index'
+    @article.destroy
+    redirect_to root_path, status: :see_other
   end
 
   private
 
+  # verify if the user in session is the owner of the article
+  def verify_owner
+    @article = Article.find(params[:id])
+    redirect_to action: 'index' unless user_signed_in? && @article.user_id == current_user.id
+  rescue StandardError
+    redirect_to action: 'index'
+  end
+
   def article_params
-    params.require(:article).permit(:title, :body, :status, :blogger_id)
+    params.require(:article).permit(:title, :body, :status, :user_id)
   end
 end

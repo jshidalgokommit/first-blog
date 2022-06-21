@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    if user_signed_in? && @comment.blogger_id == current_user.blogger.id
+    if user_signed_in? && @comment.user_id == current_user.id
       @comment.destroy
       redirect_to article_path(@article), status: 303
     else
@@ -24,6 +24,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:commenter, :body, :status, :blogger_id)
+    params.require(:comment).permit(:commenter, :body, :status, :user_id)
   end
 end
