@@ -23,6 +23,7 @@ module FollowersHelper
       res += form.button '', class: 'btn badge bg-primary rounded-pill', title: 'Follow' do
         'Follow <i data-feather="user-plus"></i>'.html_safe
       end
+      res
     end
   end
 
