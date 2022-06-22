@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   include Visible
 
   belongs_to :article
+  belongs_to :user
 
-  validates :commenter, :body, presence: true
+  validates :article_id, :commenter, :body, :user_id, presence: true
 end

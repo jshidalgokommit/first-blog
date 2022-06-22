@@ -9,33 +9,29 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
   <%= javascript_include_tag :application, integrity: true %>
+  <!--  feather icons cdn-->
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
 
 <body>
-
-<!--  start navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <%= link_to 'Articles Blog', root_path, class: 'navbar-brand' %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-      </ul>
-      <div>
-        <%= link_to 'New post', new_article_path, class: 'btn btn-success' %>
-      </div>
-    </div>
-  </div>
-</nav>
-<!--end navbar-->
-
-<!--start page content-->
-<div class="m-2">
+<% if content_for? :blog_body %>
+  <header>
+    <%= render 'layouts/blog/navbar' %>
+  </header>
+  <main role="main" class="p-3">
+    <%= yield :blog_body %>
+  </main>
+<% else %>
   <%= yield %>
-</div>
-<!--end page content-->
+  <!--flash message required to devise gem-->
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+<% end %>
+
+<script>
+    // use feather icons
+    feather.replace()
+</script>
+
 </body>
 </html>

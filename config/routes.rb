@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # authentication routes
+  devise_for :users, sign_out_via: [:get, :post]
 
   # Defines the root path route ("/")
   root "articles#index"
 
-  # get "/articles", to: "articles#index"
-  # get "/articles/:id", to: "articles#show"
-
-  #resources articles
+  # resources articles
   resources :articles do
     resources :comments
   end
 end
+

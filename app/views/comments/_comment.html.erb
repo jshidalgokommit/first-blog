@@ -7,9 +7,13 @@
       <div class="d-flex justify-content-between mt-2 gap-3">
         <small>Published on: <%= comment.created_at %></small>
 
-        <%= form_with url: [comment.article, comment], method: :delete, id: 'delete_comment_form' do |form| %>
-          <%= form.button 'Delete', class: 'btn btn-link'  %>
+        <% if user_signed_in? && comment.user_id == current_user.id %>
+          <%= form_with url: [comment.article, comment], method: :delete, id: 'delete_comment_form' do |form| %>
+            <%= form.button 'Delete', class: 'btn btn-link' %>
+          <% end %>
+
         <% end %>
+
       </div>
 
     </div>

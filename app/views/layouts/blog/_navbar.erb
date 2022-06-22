@@ -1,0 +1,50 @@
+<!--  start navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <%= link_to 'Articles Blog', root_path, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      </ul>
+      <div class="d-flex gap-3">
+        <% if user_signed_in? %>
+          <%= link_to 'New post', new_article_path, class: 'btn btn-success' %>
+        <% end %>
+        <div class="btn-group">
+          <button class="btn btn-transparent rounded-circle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i data-feather="<%= user_signed_in? ? 'user-check' : 'user' %>"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
+            <li><h6 class="dropdown-header"><%= user_signed_in? ? 'Logged user' : 'Guest user' %></h6>
+              <% if user_signed_in? %>
+                <small class="mx-3"><%= current_user.email %></small>
+                <hr class="dropdown-divider">
+              <% end %>
+            </li>
+            <% if user_signed_in? %>
+              <li><%= link_to 'Profile',edit_user_registration_path, class: 'dropdown-item'   %></li>
+            <% end %>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to destroy_user_session_path, class: "dropdown-item text-danger d-flex justify-content-center align-items-center gap-1" do %>
+                  <i data-feather="log-out" style="width: 1rem"></i> logout
+                <% end %>
+            <% else %>
+              <li>
+                <%= link_to new_user_session_path, class: "dropdown-item text-success d-flex justify-content-center align-items-center gap-1" do %>
+                  login  <i data-feather="log-in" style="width: 1rem"></i>
+                <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--end navbar-->
