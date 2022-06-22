@@ -1,0 +1,20 @@
+<% if user_signed_in? && current_user.id != user.id %>
+  <% following = user.followed_by(current_user.id) %>
+  <% if following.present? %>
+    <%= form_with model: following, method: :delete do |form| %>
+      <%= form.button '', class: 'btn badge bg-danger rounded-pill', title: 'Unfollow' do %>
+        Unfollow <i data-feather="user-minus"></i>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= form_with model: Follower, method: :post do |form| %>
+      <%= form.hidden_field :followed_user_id, value: user.id %>
+      <%= form.hidden_field :followed_by_user_id, value: current_user.id %>
+      <%= form.button '', class: 'btn badge bg-primary rounded-pill', title: 'Follow' do %>
+        Follow <i data-feather="user-plus"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<% end %>
+

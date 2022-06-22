@@ -4,7 +4,7 @@ class FollowersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bloggers = User.all.where.not(id: current_user.id)
+    @users = User.all.where.not(id: current_user.id)
   end
 
   def create
