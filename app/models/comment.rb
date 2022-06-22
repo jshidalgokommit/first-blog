@@ -6,5 +6,5 @@ class Comment < ApplicationRecord
   belongs_to :article
   belongs_to :user
 
-  validates :commenter, :body, :user_id, presence: true
+  validates :article_id, :commenter, :body, :user_id, presence: true
 end
